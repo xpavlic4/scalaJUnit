@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+        <h1>Database locator</h1>
+
+        <h:panelGroup rendered="#{empty databases}">
+            <em>No registered databases.</em>
+        </h:panelGroup>
+        <h:form>
+            <rich:dataTable var="_db" value="#{databases}" rendered="#{not empty databases}">
+                <f:facet name="header">Databases</f:facet>
+                <rich:column sortBy="#{_db.hostname}">
+                    <f:facet name="header">Hostname</f:facet>
+                    <h:outputText value="#{_db.hostname}"/>
+                </rich:column>
+                <rich:column sortBy="#{_db.tnsName}">
+                    <f:facet name="header">Tnsname</f:facet>
+                    #{_db.tnsName}
+                </rich:column>
+                <rich:column sortBy="#{_db.sid}">
+                    <f:facet name="header">Sid</f:facet>
+                    #{_db.sid}
+                </rich:column>
+                <rich:column sortBy="#{_db.serviceName}">
+                    <f:facet name="header">Servicename</f:facet>
+                    #{_db.serviceName}
+                </rich:column>
+                <rich:column sortBy="#{_db.port}">
+                    <f:facet name="header">Port</f:facet>
+                    #{_db.port}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Category</f:facet>
+                    #{_db.category}
+                </rich:column>
+                <rich:column sortBy="#{_db.country}">
+                    <f:facet name="header">Country</f:facet>
+                    #{_db.country}
+                </rich:column>
+
+                <rich:column>
+                    <f:facet name="header">REST URL JDBC</f:facet>
+                    <a href="#{request.contextPath}/rest/databases/jdbcs/#{_db.country}">/rest/databases/jdbcs/#{_db.country}</a>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">REST URL TNS Names</f:facet>
+                    <a href="#{request.contextPath}/rest/databases/tnsnames/#{_db.country}">/rest/databases/tnsnames/#{_db.country}</a>
+                </rich:column>
+                <f:facet name="footer">
+                    REST URL for all JDBCs: <a
+                        href="#{request.contextPath}/rest/databases/jdbcs/">/rest/databases/jdbcs</a>
+                    <br/>
+                    REST URL for all TNS Names: <a
+                        href="#{request.contextPath}/rest/databases/tnsnames/">/rest/databases/tnsnames</a>
+                </f:facet>
+            </rich:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
