@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DbLocator:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="scalaJUnit.war">
+      <element id="artifact" artifact-name="DbLocator:war exploded" />
+    </root>
+  </artifact>
+</component>
